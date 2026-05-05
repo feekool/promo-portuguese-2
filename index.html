@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#009739">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Feekool Português 🇧🇷 — Учи португальский с удовольствием | Форум + Геймификация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --br-green: #009739;
+            --br-yellow: #FEDD00;
+            --br-blue: #012169;
+            --br-white: #FFFFFF;
+            --gradient-primary: linear-gradient(135deg, #009739 0%, #007a2e 50%, #005c22 100%);
+            --gradient-secondary: linear-gradient(135deg, #FEDD00 0%, #e6c700 100%);
+            --gradient-accent: linear-gradient(135deg, #012169 0%, #001547 100%);
+            --shadow-soft: 0 4px 20px rgba(0, 151, 57, 0.15);
+            --shadow-hover: 0 12px 40px rgba(0, 151, 57, 0.25);
+            --radius-lg: clamp(24px, 5vw, 32px);
+            --radius-xl: clamp(32px, 7vw, 48px);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Inter', 'Nunito', sans-serif;
+            background: linear-gradient(180deg, #f8fff9 0%, #ffffff 100%);
+            color: #1a1f2c;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            font-size: clamp(14px, 1.8vw, 16px);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 clamp(16px, 4vw, 24px);
+        }
+        
+        /* Animated background elements */
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .bg-decoration::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0,151,57,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+        .bg-decoration::after {
+            content: "";
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(254,221,0,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 10px) scale(0.95); }
+        }
+        
+        /* Header & nav */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: clamp(12px, 3vw, 20px) 0;
+            border-bottom: 1px solid rgba(0,151,57,0.1);
+            gap: clamp(12px, 3vw, 16px);
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 2.5vw, 14px);
+            min-width: 0;
+        }
+        .cat-icon {
+            width: clamp(44px, 9vw, 52px);
+            height: clamp(44px, 9vw, 52px);
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: clamp(22px, 6vw, 30px);
+            box-shadow: var(--shadow-soft);
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        .cat-icon::after {
+            content: "⭐";
+            position: absolute;
+            font-size: 12px;
+            top: 4px;
+            right: 6px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.8); }
+        }
+        .brand h1 {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(1.5rem, 4.5vw, 1.9rem);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: var(--gradient-primary);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1.15;
+        }
+        .brand p {
+            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+            color: #5a6e7c;
+            font-weight: 500;
+        }
+        .btn-group {
+            display: flex;
+            gap: clamp(10px, 2.5vw, 14px);
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        /* Buttons with Brazilian flair */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(10px, 2.5vw, 12px) clamp(18px, 4.5vw, 26px);
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: clamp(0.9rem, 2.8vw, 1rem);
+            text-align: center;
+            min-height: 44px;
+            min-width: 44px;
+            white-space: nowrap;
+            cursor: pointer;
+            border: none;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+        }
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        .btn:hover::before {
+            left: 100%;
+        }
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-soft);
+        }
+        .btn-primary:hover, .btn-primary:active {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2.5px solid var(--br-green);
+            color: var(--br-green);
+            font-weight: 700;
+        }
+        .btn-outline:hover, .btn-outline:active {
+            background: rgba(0,151,57,0.08);
+            transform: translateY(-2px);
+        }
+        .btn-yellow {
+            background: var(--gradient-secondary);
+            color: #1a1f2c;
+            box-shadow: 0 4px 16px rgba(254,221,0,0.3);
+            font-weight: 800;
+        }
+        .btn-yellow:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(254,221,0,0.45);
+        }
+        .btn-large {
+            padding: clamp(14px, 3.5vw, 16px) clamp(28px, 7vw, 40px);
+            font-size: clamp(1rem, 3.2vw, 1.1rem);
+        }
+        .btn-full-mobile {
+            width: 100%;
+            max-width: 340px;
+        }
+        
+        /* Hero section - vibrant and engaging */
+        .hero {
+            padding: clamp(48px, 10vw, 72px) 0 clamp(36px, 7vw, 48px);
+            text-align: center;
+            position: relative;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient-secondary);
+            color: #1a1f2c;
+            padding: clamp(6px, 2vw, 8px) clamp(16px, 4vw, 20px);
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            margin-bottom: clamp(20px, 5vw, 28px);
+            box-shadow: 0 4px 16px rgba(254,221,0,0.35);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 16px rgba(254,221,0,0.35); }
+            50% { box-shadow: 0 6px 24px rgba(254,221,0,0.6); }
+        }
+        .hero h2 {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(2rem, 7vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            background: linear-gradient(135deg, #012169, #009739, #FEDD00);
+            background-size: 200% 200%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: clamp(20px, 5vw, 28px);
+            line-height: 1.15;
+            animation: gradientShift 8s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .hero p {
+            font-size: clamp(1.05rem, 3.8vw, 1.25rem);
+            color: #2c3e4e;
+            max-width: 780px;
+            margin: 0 auto clamp(24px, 6vw, 32px);
+            line-height: 1.5;
+            font-weight: 400;
+        }
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(12px, 3vw, 16px);
+            justify-content: center;
+            margin-top: clamp(20px, 5vw, 32px);
+        }
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(16px, 4vw, 24px);
+            margin-top: clamp(28px, 7vw, 40px);
+            padding: clamp(16px, 4vw, 20px);
+            background: rgba(255,255,255,0.7);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0,151,57,0.15);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: clamp(0.9rem, 2.8vw, 1rem);
+            color: var(--br-green);
+        }
+        .stat-item .icon {
+            font-size: 1.3rem;
+        }
+        
+        /* Progress/Level visualization */
+        .progress-showcase {
+            display: flex;
+            justify-content: center;
+            gap: clamp(8px, 2vw, 12px);
+            margin: clamp(24px, 6vw, 32px) auto 0;
+            flex-wrap: wrap;
+        }
+        .level-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: clamp(8px, 2vw, 12px) clamp(12px, 3vw, 16px);
+            background: white;
+            border-radius: 16px;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            min-width: 70px;
+        }
+        .level-badge.active {
+            border-color: var(--br-yellow);
+            background: linear-gradient(135deg, #fff, #fffbcc);
+            box-shadow: 0 4px 16px rgba(254,221,0,0.25);
+        }
+        .level-badge .level-num {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--br-blue);
+        }
+        .level-badge .level-name {
+            font-size: 0.75rem;
+            color: #5a6e7c;
+            text-align: center;
+        }
+        
+        /* Quick access bar */
+        .quick-access {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(8px, 2vw, 12px);
+            justify-content: center;
+            margin: clamp(24px, 6vw, 48px) 0;
+            padding: clamp(14px, 3.5vw, 18px);
+            background: linear-gradient(135deg, rgba(0,151,57,0.06), rgba(254,221,0,0.06));
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(0,151,57,0.2);
+        }
+        .quick-access .btn {
+            padding: clamp(8px, 2vw, 10px) clamp(14px, 3.5vw, 20px);
+            font-size: clamp(0.85rem, 2.6vw, 0.95rem);
+            font-weight: 700;
+        }
+        
+        /* Sections */
+        .section {
+            padding: clamp(48px, 10vw, 72px) 0;
+        }
+        .section-title {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+            font-weight: 800;
+            margin-bottom: clamp(28px, 7vw, 48px);
+            text-align: center;
+            letter-spacing: -0.5px;
+            line-height: 1.25;
+            color: var(--br-blue);
+            position: relative;
+        }
+        .section-title::after {
+            content: "";
+            display: block;
+            width: clamp(60px, 15vw, 100px);
+            height: 4px;
+            background: var(--gradient-secondary);
+            margin: 16px auto 0;
+            border-radius: 2px;
+        }
+        
+        /* Feature cards with gamification elements */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+            gap: clamp(24px, 5vw, 36px);
+        }
+        .card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: clamp(24px, 5vw, 32px) clamp(20px, 4vw, 24px);
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0,151,57,0.1);
+            border-top: 4px solid var(--br-green);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(12px, 3vw, 16px);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(254,221,0,0.15) 0%, transparent 70%);
+            border-radius: 0 0 0 80px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--br-green);
+        }
+        .card:hover::before {
+            opacity: 1;
+        }
+        .card-icon {
+            font-size: clamp(2.2rem, 6.5vw, 2.8rem);
+            line-height: 1;
+            position: relative;
+            z-index: 2;
+        }
+        .card h3 {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(1.25rem, 4.2vw, 1.6rem);
+            font-weight: 800;
+            line-height: 1.25;
+            color: var(--br-blue);
+        }
+        .card p {
+            color: #3a4a5c;
+            font-size: clamp(0.92rem, 3vw, 1.02rem);
+            line-height: 1.55;
+        }
+        .card .btn {
+            margin-top: auto;
+            align-self: flex-start;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+        }
+        .xp-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: var(--gradient-secondary);
+            color: #1a1f2c;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 8px rgba(254,221,0,0.3);
+        }
+        
+        /* Learning path section */
+        .learning-path {
+            background: linear-gradient(135deg, #f0fff4, #fff9e6, #f0f7ff);
+            border-radius: var(--radius-xl);
+            padding: clamp(28px, 6vw, 44px) clamp(24px, 5vw, 36px);
+            margin: clamp(24px, 6vw, 40px) 0;
+            border: 2px solid rgba(0,151,57,0.2);
+            position: relative;
+        }
+        .path-title {
+            text-align: center;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.3rem, 4vw, 1.6rem);
+            color: var(--br-blue);
+            margin-bottom: clamp(20px, 5vw, 28px);
+        }
+        .path-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: clamp(16px, 4vw, 24px);
+            position: relative;
+        }
+        .path-steps::before {
+            content: "";
+            position: absolute;
+            top: 24px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--br-green), var(--br-yellow), var(--br-blue));
+            border-radius: 2px;
+            z-index: 1;
+        }
+        .path-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .path-step .step-icon {
+            width: clamp(48px, 10vw, 56px);
+            height: clamp(48px, 10vw, 56px);
+            background: white;
+            border: 3px solid var(--br-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--br-green);
+            box-shadow: 0 4px 12px rgba(0,151,57,0.15);
+        }
+        .path-step.completed .step-icon {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+        }
+        .path-step .step-label {
+            font-weight: 700;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            color: var(--br-blue);
+        }
+        .path-step .step-desc {
+            font-size: clamp(0.7rem, 2vw, 0.8rem);
+            color: #5a6e7c;
+            max-width: 120px;
+        }
+        
+        /* Installation steps - clearer visual hierarchy */
+        .steps {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: clamp(28px, 6vw, 44px) clamp(24px, 5vw, 36px);
+            margin-top: clamp(20px, 5vw, 32px);
+            box-shadow: var(--shadow-soft);
+            border: 2px solid rgba(0,151,57,0.15);
+        }
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(24px, 5vw, 32px);
+            counter-reset: step-counter;
+        }
+        .step-item {
+            display: flex;
+            gap: clamp(16px, 4vw, 24px);
+            align-items: flex-start;
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: clamp(20px, 5vw, 28px);
+        }
+        .step-item::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: clamp(36px, 8vw, 44px);
+            height: clamp(36px, 8vw, 44px);
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+            font-family: 'Nunito', sans-serif;
+            box-shadow: 0 4px 12px rgba(0,151,57,0.25);
+        }
+        .step-text {
+            font-size: clamp(0.92rem, 3vw, 1.02rem);
+            line-height: 1.55;
+            flex: 1;
+        }
+        .step-text strong {
+            font-size: clamp(1.02rem, 3.2vw, 1.12rem);
+            display: block;
+            margin-bottom: clamp(6px, 1.5vw, 8px);
+            font-weight: 800;
+            color: var(--br-blue);
+            font-family: 'Nunito', sans-serif;
+        }
+        .step-text a {
+            color: var(--br-green);
+            text-decoration: none;
+            word-break: break-all;
+            font-weight: 600;
+            border-bottom: 2px dashed rgba(0,151,57,0.3);
+        }
+        .step-text a:hover { 
+            border-bottom-style: solid;
+            color: var(--br-blue);
+        }
+        .alt-install {
+            background: linear-gradient(135deg, #f0fff4, #fff9e6);
+            border-radius: clamp(20px, 4.5vw, 28px);
+            padding: clamp(16px, 4vw, 24px);
+            text-align: center;
+            margin-top: clamp(28px, 7vw, 40px);
+            font-size: clamp(0.92rem, 3vw, 1.02rem);
+            border-left: 4px solid var(--br-yellow);
+            font-weight: 500;
+        }
+        .steps-cta {
+            text-align: center;
+            margin-top: clamp(28px, 7vw, 36px);
+        }
+        
+        /* Cultural immersion cards */
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+            gap: clamp(16px, 4vw, 24px);
+            margin-top: clamp(24px, 6vw, 36px);
+        }
+        .culture-card {
+            background: white;
+            border-radius: clamp(20px, 4.5vw, 28px);
+            padding: clamp(20px, 4.5vw, 28px) clamp(16px, 3.5vw, 20px);
+            text-align: center;
+            border: 2px solid rgba(1,33,105,0.1);
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+        .culture-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+        }
+        .culture-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--br-yellow);
+            box-shadow: 0 8px 24px rgba(254,221,0,0.2);
+        }
+        .culture-card .icon {
+            font-size: clamp(2rem, 5.5vw, 2.5rem);
+            margin-bottom: clamp(8px, 2vw, 12px);
+        }
+        .culture-card h4 {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1rem, 3.2vw, 1.15rem);
+            color: var(--br-blue);
+            margin-bottom: 6px;
+        }
+        .culture-card p {
+            font-size: clamp(0.85rem, 2.6vw, 0.92rem);
+            color: #5a6e7c;
+            line-height: 1.45;
+        }
+        
+        /* Gallery with interactive preview */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+            gap: clamp(18px, 4.5vw, 24px);
+            justify-content: center;
+            margin-top: clamp(24px, 6vw, 36px);
+        }
+        .gallery-item {
+            background: white;
+            border-radius: clamp(24px, 5vw, 32px);
+            padding: clamp(12px, 3vw, 16px);
+            display: flex;
+            flex-direction: column;
+            border: 2px solid rgba(0,151,57,0.15);
+            transition: all 0.25s;
+        }
+        .gallery-item:hover {
+            border-color: var(--br-green);
+            box-shadow: var(--shadow-soft);
+        }
+        .gallery-img {
+            width: 100%;
+            aspect-ratio: 220/160;
+            background: linear-gradient(135deg, var(--br-green), var(--br-blue));
+            border-radius: clamp(16px, 4vw, 24px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: white;
+            font-weight: 800;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .gallery-img::after {
+            content: "🇧🇷";
+            position: absolute;
+            font-size: clamp(2.5rem, 7vw, 4rem);
+            opacity: 0.15;
+            transform: rotate(-15deg);
+        }
+        .gallery-caption {
+            margin-top: clamp(10px, 2.5vw, 14px);
+            text-align: center;
+            font-weight: 700;
+            color: var(--br-blue);
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(0.9rem, 2.8vw, 1rem);
+        }
+        
+        /* CTA Block - high energy */
+        .cta-block {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0,151,57,0.08), rgba(254,221,0,0.08), rgba(1,33,105,0.08));
+            border-radius: var(--radius-xl);
+            padding: clamp(40px, 9vw, 56px) clamp(24px, 5vw, 32px);
+            margin: clamp(24px, 6vw, 48px) 0;
+            border: 3px solid var(--br-yellow);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-block::before {
+            content: "🎉";
+            position: absolute;
+            font-size: clamp(4rem, 12vw, 8rem);
+            opacity: 0.06;
+            top: -20px;
+            right: -20px;
+            animation: bounce 4s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .offer-badge {
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 60px;
+            padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 28px);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: clamp(20px, 5vw, 28px);
+            font-weight: 800;
+            font-size: clamp(0.95rem, 3vw, 1.05rem);
+            font-family: 'Nunito', sans-serif;
+            box-shadow: 0 6px 20px rgba(0,151,57,0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+        .cta-block h3 {
+            font-family: 'Nunito', sans-serif;
+            font-size: clamp(1.5rem, 5vw, 2.1rem);
+            font-weight: 800;
+            margin-bottom: clamp(14px, 3.5vw, 20px);
+            line-height: 1.2;
+            color: var(--br-blue);
+        }
+        .cta-block p {
+            max-width: 720px;
+            margin: 0 auto clamp(24px, 6vw, 32px);
+            font-size: clamp(1rem, 3.2vw, 1.1rem);
+            line-height: 1.55;
+            font-weight: 400;
+        }
+        .cta-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(12px, 3vw, 16px);
+            justify-content: center;
+            margin: clamp(20px, 5vw, 28px) 0;
+        }
+        .cta-note {
+            background: white;
+            border-radius: 60px;
+            padding: clamp(14px, 3.5vw, 18px) clamp(24px, 6vw, 32px);
+            max-width: 620px;
+            margin: clamp(28px, 7vw, 40px) auto 0;
+            font-size: clamp(0.95rem, 3vw, 1.05rem);
+            line-height: 1.5;
+            border: 2px solid var(--br-green);
+            font-weight: 500;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        /* Footer */
+        footer {
+            padding: clamp(40px, 9vw, 56px) 0 clamp(32px, 7vw, 48px);
+            text-align: center;
+            color: #5a6e7c;
+            font-size: clamp(0.85rem, 2.6vw, 0.95rem);
+            line-height: 1.7;
+            background: linear-gradient(180deg, transparent, rgba(0,151,57,0.04));
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            margin-top: clamp(32px, 8vw, 56px);
+        }
+        footer a {
+            color: var(--br-green);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px dashed rgba(0,151,57,0.3);
+        }
+        footer a:hover { 
+            border-bottom-style: solid;
+            color: var(--br-blue);
+        }
+        
+        /* Floating mobile CTA */
+        .mobile-cta {
+            display: none;
+            position: fixed;
+            bottom: clamp(14px, 3.5vw, 24px);
+            left: clamp(14px, 3.5vw, 24px);
+            right: clamp(14px, 3.5vw, 24px);
+            z-index: 999;
+            padding: clamp(10px, 2.5vw, 14px);
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0,151,57,0.35);
+            animation: slideUp 0.4s ease;
+            border: 2px solid var(--br-yellow);
+        }
+        @keyframes slideUp {
+            from { transform: translateY(120px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .mobile-cta .btn {
+            width: 100%;
+            padding: clamp(14px, 3.5vw, 16px);
+            font-size: clamp(1rem, 3.2vw, 1.1rem);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+        }
+        
+        /* Portuguese phrase highlights */
+        .pt-phrase {
+            font-style: italic;
+            color: var(--br-green);
+            font-weight: 700;
+            background: linear-gradient(135deg, rgba(0,151,57,0.1), rgba(254,221,0,0.1));
+            padding: 3px 10px;
+            border-radius: 8px;
+            border-left: 3px solid var(--br-yellow);
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        /* Responsive breakpoints */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            .logo-area {
+                justify-content: center;
+            }
+            .btn-group {
+                justify-content: center;
+                flex: none;
+            }
+            .hero-buttons .btn {
+                flex: 1;
+                min-width: 150px;
+            }
+            .step-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding-left: 0;
+            }
+            .step-item::before {
+                position: relative;
+                left: auto;
+                top: auto;
+                margin-bottom: 12px;
+            }
+            .cta-buttons .btn {
+                flex: 1;
+                min-width: 170px;
+                max-width: 300px;
+            }
+            .path-steps::before {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .btn-group {
+                width: 100%;
+            }
+            .btn-group .btn {
+                flex: 1;
+                min-width: 0;
+                font-size: 0.9rem;
+                padding: 10px 16px;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .card {
+                padding: 24px 20px;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            .quick-access {
+                flex-direction: column;
+            }
+            .quick-access .btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            .brand h1 {
+                font-size: 1.4rem;
+            }
+            .btn-large {
+                padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        /* Show mobile CTA on small screens */
+        @media (max-width: 768px) {
+            .mobile-cta {
+                display: block;
+            }
+            .desktop-only {
+                display: none;
+            }
+        }
+        @media (min-width: 769px) {
+            .mobile-only {
+                display: none;
+            }
+        }
+        
+        /* Accessibility */
+        .btn:focus, 
+        input:focus,
+        a:focus {
+            outline: 3px solid var(--br-yellow);
+            outline-offset: 3px;
+        }
+        
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Animated background -->
+<div class="bg-decoration" aria-hidden="true"></div>
+
+<div class="container">
+    <!-- Header / навигация -->
+    <nav class="navbar" aria-label="Основная навигация">
+        <div class="logo-area">
+            <div class="cat-icon" aria-hidden="true">🇧🇷</div>
+            <div class="brand">
+                <h1>Feekool Português</h1>
+                <p>учи с удовольствием • играй • общайся</p>
+            </div>
+        </div>
+        <div class="btn-group">
+            <a href="https://feekool.github.io" target="_blank" class="btn btn-outline" aria-label="Открыть демо">👁️ Демо</a>
+            <a href="#contact" class="btn btn-primary">✉️ Начать</a>
+        </div>
+    </nav>
+
+    <!-- Hero блок -->
+    <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-badge">🎮 <span class="pt-phrase">Aprender brincando!</span> Учи португальский в игре</div>
+        <h2 id="hero-title">Твой путь к свободному португальскому:<br>форум + геймификация + культура</h2>
+        <p>Забудь про скучные учебники! Практикуй язык в живом сообществе, получай достижения, соревнуйся с друзьями и погружайся в культуру Бразилии и Португалии. <span class="pt-phrase">É diversão garantida!</span></p>
+        
+        <div class="hero-buttons">
+            <a href="https://feekool.github.io" target="_blank" class="btn btn-primary btn-large btn-full-mobile" aria-label="Посмотреть демо-версию форума">
+                🚀 Начать приключение 🇧🇷
+            </a>
+            <a href="https://github.com/feekool/feekool.github.io" target="_blank" class="btn btn-yellow btn-large btn-full-mobile" aria-label="Скачать шаблон">
+                📦 Создать свой форум
+            </a>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat-item"><span class="icon">⏱️</span> 1 минута на запуск</div>
+            <div class="stat-item"><span class="icon">🆓</span> 100% бесплатно</div>
+            <div class="stat-item"><span class="icon">🏆</span> Система уровней</div>
+            <div class="stat-item"><span class="icon">🌍</span> PT/BR поддержка</div>
+        </div>
+        
+        <div class="progress-showcase" aria-label="Пример прогресса ученика">
+            <div class="level-badge">
+                <span class="level-num">A1</span>
+                <span class="level-name">Iniciante</span>
+            </div>
+            <div class="level-badge active">
+                <span class="level-num">A2</span>
+                <span class="level-name">Básico</span>
+            </div>
+            <div class="level-badge">
+                <span class="level-num">B1</span>
+                <span class="level-name">Intermédio</span>
+            </div>
+            <div class="level-badge">
+                <span class="level-num">B2</span>
+                <span class="level-name">Avançado</span>
+            </div>
+            <div class="level-badge">
+                <span class="level-num">C1</span>
+                <span class="level-name">Fluente</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Быстрый доступ -->
+    <div class="quick-access" role="navigation" aria-label="Быстрые ссылки">
+        <a href="https://feekool.github.io" target="_blank" class="btn btn-outline">🔗 Демо форума</a>
+        <a href="#path" class="btn btn-outline">🗺️ Путь обучения</a>
+        <a href="#install" class="btn btn-outline">⚙️ Установка</a>
+        <a href="#culture" class="btn btn-outline">🎭 Культура</a>
+    </div>
+
+    <!-- Преимущества с геймификацией -->
+    <section class="section" aria-labelledby="features-title">
+        <h2 id="features-title" class="section-title">🎮 Почему учить с Feekool — кайф?</h2>
+        <div class="cards-grid">
+            <article class="card">
+                <span class="xp-badge">+50 XP</span>
+                <div class="card-icon" aria-hidden="true">🏆</div>
+                <h3>Система достижений</h3>
+                <p>Получай бейджи за активность: <span class="pt-phrase">"Primeira Postagem"</span>, <span class="pt-phrase">"10 Palavras Novas"</span>, <span class="pt-phrase">"Conversador"</span>. Мотивация в каждом сообщении!</p>
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-outline">👉 Демо достижений</a>
+            </article>
+            <article class="card">
+                <span class="xp-badge">+100 XP</span>
+                <div class="card-icon" aria-hidden="true">👥</div>
+                <h3>Командные челленджи</h3>
+                <p>Соревнуйся в группах: кто выучит больше слов, напишет длиннее эссе, найдёт ошибку в тексте. <span class="pt-phrase">Juntos somos mais fortes!</span></p>
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-outline">👥 Демо челленджей</a>
+            </article>
+            <article class="card">
+                <span class="xp-badge">+30 XP</span>
+                <div class="card-icon" aria-hidden="true">🎧</div>
+                <h3>Аудио-практика</h3>
+                <p>Записывай голосовые сообщения, слушай носителей, получай обратную связь. Развивай произношение в безопасной среде.</p>
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-outline">🎧 Демо аудио</a>
+            </article>
+            <article class="card">
+                <span class="xp-badge">+75 XP</span>
+                <div class="card-icon" aria-hidden="true">🎁</div>
+                <h3>Еженедельные награды</h3>
+                <p>Активных участников ждут бонусы: доступ к премиум-материалам, персональные консультации, сертификаты.</p>
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-outline">🎁 Демо наград</a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Learning Path -->
+    <section class="section" id="path" aria-labelledby="path-title">
+        <h2 id="path-title" class="section-title">🗺️ Твой персональный путь к свободе в языке</h2>
+        
+        <div class="learning-path">
+            <div class="path-title">Прогресс от <span class="pt-phrase">"Olá"</span> до <span class="pt-phrase">"Fluência total"</span></div>
+            <div class="path-steps">
+                <div class="path-step completed">
+                    <div class="step-icon">✓</div>
+                    <div class="step-label">Старт</div>
+                    <div class="step-desc">Знакомство, алфавит, приветствия</div>
+                </div>
+                <div class="path-step completed">
+                    <div class="step-icon">✓</div>
+                    <div class="step-label">База</div>
+                    <div class="step-desc">Числа, цвета, простые фразы</div>
+                </div>
+                <div class="path-step active">
+                    <div class="step-icon">★</div>
+                    <div class="step-label">Разговор</div>
+                    <div class="step-desc">Диалоги, вопросы, ответы</div>
+                </div>
+                <div class="path-step">
+                    <div class="step-icon">🔒</div>
+                    <div class="step-label">Грамматика</div>
+                    <div class="step-desc">Времена, спряжения, предлоги</div>
+                </div>
+                <div class="path-step">
+                    <div class="step-icon">🔒</div>
+                    <div class="step-label">Свобода</div>
+                    <div class="step-desc">Свободное общение, юмор, идиомы</div>
+                </div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 24px; color: #5a6e7c; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Каждый раздел форума соответствует этапу пути. Открывай новые темы по мере роста — как в любимой игре! 🎮✨
+        </p>
+    </section>
+
+    <!-- Установка -->
+    <section class="section" id="install" aria-labelledby="install-title">
+        <h2 id="install-title" class="section-title">⚡ Запусти свой форум за 60 секунд</h2>
+        <p style="text-align: center; margin-bottom: 28px; color: #4b5b6c; max-width: 720px; margin-left: auto; margin-right: auto; font-weight: 500;">
+            Никаких технических знаний не нужно. Просто следуй шагам — и твое языковое сообщество готово!
+        </p>
+        
+        <div class="steps">
+            <ol class="step-list">
+                <li class="step-item">
+                    <div class="step-text">
+                        <strong>1. GitHub аккаунт</strong>
+                        Зарегистрируйся бесплатно на <a href="https://github.com" target="_blank">github.com</a>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-text">
+                        <strong>2. Шаблон форума</strong><br>
+                        Перейди: <a href="https://github.com/feekool/feekool.github.io" target="_blank">github.com/feekool/feekool.github.io</a>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-text">
+                        <strong>3. Создай копию</strong><br>
+                        Нажми <strong>"Use this template"</strong> → <strong>"Create a new repository"</strong>. Название: <span class="pt-phrase">"meu-portugues"</span> или <span class="pt-phrase">"portugues-comunidade"</span>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-text">
+                        <strong>4. Включи GitHub Pages</strong><br>
+                        Settings → Pages → выбери ветку <strong>main</strong> → Save. Готово! 🎉
+                    </div>
+                </li>
+                <li class="step-item">
+                    <div class="step-text">
+                        <strong>5. Настрой под себя</strong><br>
+                        Добавь разделы: <span class="pt-phrase">"Desafios Diários"</span>, <span class="pt-phrase">"Música Brasileira"</span>, <span class="pt-phrase">"Erros Comuns"</span>, <span class="pt-phrase">"Parceiros de Conversação"</span>
+                    </div>
+                </li>
+            </ol>
+            
+            <div class="alt-install">
+                💡 <strong>Pro tip:</strong> Хочешь установить на свой хостинг? Скачай архив — но <strong>GitHub Pages</strong> быстрее, проще и бесплатно навсегда!
+            </div>
+            
+            <div class="steps-cta">
+                <a href="https://feekool.github.io" target="_blank" class="btn btn-primary btn-large btn-full-mobile" style="margin-bottom: 14px;">
+                    👁️ Сначала посмотри демо!
+                </a><br>
+                <a href="https://github.com/feekool/feekool.github.io" target="_blank" class="btn btn-yellow btn-large btn-full-mobile">
+                    ⚡ Создать форум сейчас
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Культурное погружение -->
+    <section class="section" id="culture" aria-labelledby="culture-title">
+        <h2 id="culture-title" class="section-title">🌎 Язык через культуру: учись с удовольствием</h2>
+        <p style="text-align: center; margin-bottom: 28px; color: #4b5b6c; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Португальский — это не только грамматика. Это музыка, футбол, кулинария, праздники и люди!
+        </p>
+        
+        <div class="culture-grid">
+            <div class="culture-card">
+                <div class="icon">🎵</div>
+                <h4>Música</h4>
+                <p>Разбор текстов босса-новы, самбы, фанки. Учи слова через любимые песни!</p>
+            </div>
+            <div class="culture-card">
+                <div class="icon">⚽</div>
+                <h4>Futebol</h4>
+                <p>Обсуждай матчи, читай новости, учи футбольный сленг. <span class="pt-phrase">Gol!</span></p>
+            </div>
+            <div class="culture-card">
+                <div class="icon">🍽️</div>
+                <h4>Gastronomia</h4>
+                <p>Рецепты фейжоады, паэллы, паштел-де-ната. Готовь и учи названия ингредиентов!</p>
+            </div>
+            <div class="culture-card">
+                <div class="icon">🎭</div>
+                <h4>Festas</h4>
+                <p>Карнавал, праздники, традиции. Погружайся в культуру через события!</p>
+            </div>
+            <div class="culture-card">
+                <div class="icon">✈️</div>
+                <h4>Viagens</h4>
+                <p>Готовишься к поездке? Практикуй фразы для отеля, ресторана, экскурсий.</p>
+            </div>
+            <div class="culture-card">
+                <div class="icon">📺</div>
+                <h4>Séries & Filmes</h4>
+                <p>Обсуждай бразильские сериалы, португальское кино. Учи через контекст!</p>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: clamp(28px, 7vw, 40px); background: linear-gradient(135deg, rgba(1,33,105,0.06), rgba(0,151,57,0.06)); padding: clamp(14px, 3.5vw, 18px); border-radius: 60px; font-size: clamp(0.92rem, 3vw, 1.02rem); border: 1px solid rgba(0,151,57,0.2);">
+            🛠️ Нужна помощь с настройкой разделов под твои интересы? <a href="https://github.com/feekool/feekool.github.io/issues" target="_blank" style="color: var(--br-green); font-weight: 700;">Напиши нам</a> — поможем создать идеальное пространство!
+        </p>
+    </section>
+
+    <!-- Галерея -->
+    <section class="section" aria-labelledby="gallery-title">
+        <h2 id="gallery-title" class="section-title">🖼️ Как может выглядеть твой форум</h2>
+        <div class="gallery" id="galleryContainer">
+            <div class="gallery-item">
+                <div class="gallery-img">💬</div>
+                <div class="gallery-caption">Раздел: Conversação Diária</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-img">📝</div>
+                <div class="gallery-caption">Раздел: Desafios de Escrita</div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-img">🎵</div>
+                <div class="gallery-caption">Раздел: Música Brasileira</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 28px;">
+            <a href="https://feekool.github.io" target="_blank" class="btn btn-primary btn-large">🎨 Посмотреть все примеры в демо</a>
+        </div>
+    </section>
+
+    <!-- CTA блок -->
+    <section class="cta-block" id="contact" aria-labelledby="cta-title">
+        <div class="offer-badge">🔥 <span class="pt-phrase">Bora começar?</span> Твой португальский ждёт! 🔥</div>
+        <h3 id="cta-title">Преврати изучение языка в приключение</h3>
+        <p>
+            Хватит откладывать! Создай форум сегодня — и уже завтра начни практиковаться с единомышленниками. 
+            <span class="pt-phrase">Cada dia é uma nova oportunidade!</span>
+        </p>
+        
+        <div class="cta-buttons">
+            <a href="https://feekool.github.io" target="_blank" class="btn btn-primary btn-large">
+                🚀 Демо: начни играть
+            </a>
+            <a href="https://feekool.github.io" target="_blank" class="btn btn-outline btn-large">
+                👁️ Посмотреть возможности
+            </a>
+            <a href="https://github.com/feekool/feekool.github.io/issues" target="_blank" class="btn btn-yellow btn-large">
+                💬 Бесплатная консультация
+            </a>
+        </div>
+        
+        <div class="cta-note">
+            ⚡ <strong>Подарок для первых:</strong> Напиши нам при создании форума — поможем настроить систему достижений и стартовые челленджи специально для твоих учеников! <span class="pt-phrase">Estamos torcendo por você! 🙌</span>
+        </div>
+    </section>
+
+    <!-- Финальные кнопки -->
+    <div style="display: flex; justify-content: center; gap: clamp(14px, 3.5vw, 28px); flex-wrap: wrap; margin: clamp(20px, 5vw, 48px) 0;" role="navigation" aria-label="Основные действия">
+        <a href="https://feekool.github.io" target="_blank" class="btn btn-primary btn-large" aria-label="Перейти к демо">
+            🎯 Демо-форум 🇧🇷
+        </a>
+        <a href="https://feekool.github.io" target="_blank" class="btn btn-outline btn-large" aria-label="Предварительный просмотр">
+            👁️ Предпросмотр
+        </a>
+        <a href="https://github.com/feekool/feekool.github.io" target="_blank" class="btn btn-yellow btn-large" aria-label="GitHub репозиторий">
+            🐙 Исходный код
+        </a>
+    </div>
+
+    <footer>
+        <p>© Feekool Português — форум для изучения португальского с геймификацией на GitHub Pages.<br>
+        Open-source база + возможность кастомизации под онлайн-школы, репетиторов, языковые клубы.</p>
+        <p style="margin-top: 14px; font-weight: 500;">
+            🚀 Без серверов • Без сложностей • Только прогресс и удовольствие
+        </p>
+        <p style="margin-top: 14px;">
+            <a href="https://feekool.github.io" target="_blank">👁️ Открыть демо и начать сейчас</a> • 
+            <span class="pt-phrase" style="margin-left: 8px; font-weight: 700;">Obrigado e boa sorte! 🍀</span>
+        </p>
+    </footer>
+</div>
+
+<!-- Плавающая кнопка для мобильных -->
+<div class="mobile-cta" role="navigation" aria-label="Быстрый старт">
+    <a href="https://feekool.github.io" target="_blank" class="btn btn-primary" aria-label="Открыть демо-версию форума">
+        🇧🇷 Начать учить португальский!
+    </a>
+</div>
+
+<!-- Скрипт для галереи и интерактива -->
+<script>
+    (function() {
+        // Простая анимация для level-badge при скролле
+        const badges = document.querySelectorAll('.level-badge');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        badges.forEach(badge => {
+            badge.style.opacity = '0';
+            badge.style.transform = 'translateY(10px)';
+            badge.style.transition = 'opacity 0.4s, transform 0.4s';
+            observer.observe(badge);
+        });
+        
+        // Плавное появление мобильного CTA
+        const mobileCta = document.querySelector('.mobile-cta');
+        if (mobileCta) {
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                if (currentScroll > 400 && currentScroll > lastScroll) {
+                    mobileCta.style.transform = 'translateY(0)';
+                    mobileCta.style.opacity = '1';
+                } else if (currentScroll < 150) {
+                    mobileCta.style.transform = 'translateY(120px)';
+                    mobileCta.style.opacity = '0';
+                }
+                lastScroll = currentScroll;
+            }, { passive: true });
+        }
+    })();
+</script>
+
+<!-- Structured data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Feekool Português",
+  "description": "Учи португальский язык с геймификацией: форум на GitHub Pages с достижениями, челленджами и культурным погружением. Бесплатно, без серверов, за 1 минуту.",
+  "applicationCategory": "EducationalGame",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "RUB"
+  },
+  "url": "https://feekool.github.io",
+  "inLanguage": ["ru", "pt", "pt-BR", "pt-PT"],
+  "keywords": ["португальский язык", "изучение языка", "геймификация", "достижения", "онлайн-курсы", "разговорный клуб", "Бразилия", "Португалия", "культурное погружение", "языковой форум"]
+}
+</script>
+</body>
+</html>
